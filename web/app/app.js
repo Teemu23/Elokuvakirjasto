@@ -16,7 +16,8 @@ MyApp.config(function ($routeProvider) {
                 controller: 'AddMovieController'
             })
             .otherwise({
-                redirectTo: '/'
+                redirectTo: '/',
+                controller: 'ListMoviesController'
             });
 
 });
