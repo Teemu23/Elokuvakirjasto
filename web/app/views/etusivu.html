@@ -1,9 +1,8 @@
-etusivu
 <ul ng-repeat="movie in movies">
     <li>
-        <p>Nimi: {{movie.nimi}}</p>
-        <p>Ohjaaja: {{movie.ohjaaja}}</p>
-        <p>Julkaisuvuosi: {{movie.julkaisuvuosi}}</p> 
-        <p>Kuvaus: {{movie.kuvaus}}</p>
+        <a ng-href="#/movies/{{movie.$id}}"><p>Nimi: {{movie.nimi}} </p></a>
     </li> 
+    <button ng-click="removeMovie($index)">Poista</button>
+    <a ng-href="#/movies/{{movie.$id}}/edit"><button>Muokkaa</button></a>
 </ul>
+<a ng-href="#/movies/new">Lisää uusi elokuva</a>

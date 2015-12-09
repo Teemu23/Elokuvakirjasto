@@ -1,9 +1,31 @@
-movies
 <ul ng-repeat="movie in movies">
     <li>
-        <p><b>Nimi:</b> {{movie.nimi}}</p>
-        <p><b>Ohjaaja:</b> {{movie.ohjaaja}}</p>
-        <p><b>Julkaisuvuosi:</b> {{movie.julkaisuvuosi}}</p> 
-        <p><b>Kuvaus:</b> {{movie.kuvaus}}</p>
+        <a ng-href="#/movies/{{movie.$id}}"><p>Nimi: {{movie.nimi}} </p></a>
     </li> 
+    <button ng-click="removeMovie($index)">Poista</button>
+    <a ng-href="#/movies/{{movie.$id}}/edit"><button>Muokkaa</button></a>
 </ul>
+<a ng-href="#/movies/new">Lisää uusi elokuva</a>
+<br />
+<br />
+<h3>Elokuvahaku</h3>
+<div>
+    <form ng-model="elokuvaHaku">
+        Nimi:<input type="text" ng-model="nimiHaku" />
+        Vuosi:<input type="text" ng-model="vuosiHaku" />
+        <input type="submit" value="Hae" ng-click="haeElokuvat()">
+    </form>
+</div>
+
+<ul ng-repeat="movie in moviesHaku.Search">
+    <li>
+        {{movie.Title}}
+        {{movie.Year}}
+    </li>
+</ul>
+
+<ng-pluralize count="moviesCount"
+                 when="{'0': 'Hakusanalla ei löytynyt elokuvia',
+                     'one': 'Hakusanalla löytyi yksi elokuva.',
+                     'other': 'Hakusanalla löytyi {} elokuvaa.'}">
+</ng-pluralize>

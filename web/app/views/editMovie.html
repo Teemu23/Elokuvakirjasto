@@ -1,0 +1,26 @@
+
+<form name="muokkaus" novalidate ng-model="editMovie">
+    Nimi: 
+    <input type="text" ng-model="nimi" name="uNimi" required/> ({{data.nimi}}) <br />
+    <div ng-show="muokkaus.$submitted">
+        <div ng-show="muokkaus.uNimi.$error.required">Lisää elokuvan nimi.</div>
+    </div>
+    Ohjaaja: 
+    <input type="text" ng-model="ohjaaja" name="uOhjaaja" required/>({{data.ohjaaja}}) <br />
+    <div ng-show="muokkaus.$submitted">
+        <div ng-show="muokkaus.uOhjaaja.$error.required">Lisää ohjaajan nimi.</div>
+    </div>
+    Julkaisuvuosi: 
+    <input type="text" ng-model="vuosi" name="uVuosi" required pattern="\d*"/>({{data.julkaisuvuosi}}) <br />
+    <div ng-show="muokkaus.$submitted">
+        <div ng-show="muokkaus.uVuosi.$error.required">Lisää elokuvan julkaisuvuosi.</div>
+        <div ng-show="muokkaus.uVuosi.$error.pattern">Vuosi saa sisältää pelkästään numeroita.</div>
+    </div>
+    Kuvaus: 
+    <input type="text" ng-model="kuvaus" name="uKuvaus" required/>({{data.kuvaus}}) <br>
+    <div ng-show="muokkaus.$submitted">
+        <div ng-show="muokkaus.uKuvaus.$error.required">Lisää elokuvan kuvaus.</div>
+    </div>
+    <input type="submit" value="Muokkaa" ng-click="editMovie()" /> <br>
+</form>
+<a href="#/movies"><button>Takaisin</button></a>
