@@ -1,0 +1,25 @@
+
+<form name="lisays" novalidate ng-model="newMovie">
+    Nimi: 
+    <input type="text" ng-model="nimi" name="uNimi" required/> <br />
+    <div ng-show="lisays.$submitted">
+        <div ng-show="lisays.uNimi.$error.required">Lisää elokuvan nimi.</div>
+    </div>
+    Ohjaaja: 
+    <input type="text" ng-model="ohjaaja" name="uOhjaaja" required/> <br />
+    <div ng-show="lisays.$submitted">
+        <div ng-show="lisays.uOhjaaja.$error.required">Lisää ohjaajan nimi.</div>
+    </div>
+    Julkaisuvuosi: 
+    <input type="text" ng-model="vuosi" name="uVuosi" required pattern="\d*"/> <br />
+    <div ng-show="lisays.$submitted">
+        <div ng-show="lisays.uVuosi.$error.required">Lisää elokuvan julkaisuvuosi.</div>
+        <div ng-show="lisays.uVuosi.$error.pattern">Vuosi saa sisältää pelkästään numeroita.</div>
+    </div>
+    Kuvaus: 
+    <input type="text" ng-model="kuvaus" name="uKuvaus" required/> <br>
+    <div ng-show="lisays.$submitted">
+        <div ng-show="lisays.uKuvaus.$error.required">Lisää elokuvan kuvaus.</div>
+    </div>
+    <input type="submit" ng-click="addMovie()" /> <br>
+</form>
