@@ -14,5 +14,9 @@
   },
   "dependencies": {
     "karma-chrome-launcher": "^0.1.8"
+  },
+  "engines": {
+	"node": "5.1.x",
+	"npm": "3.3.x"
   }
 }
