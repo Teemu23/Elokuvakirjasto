@@ -1,0 +1,16 @@
+<h3>Rekisteröidy</h3>
+<form >
+    Email: <input type='email' ng-model='newEmail'/>
+    Salasana: <input type='password' ng-model='newPassword' />
+    <input type='submit' ng-click='register()' value='Rekisteröidy' />
+</form>
+{{messageReg}}
+<br/>
+<h3>Kirjadu sisään</h3>
+
+<form >
+    Email: <input type='email' ng-model='email'/>
+    Salasana: <input type='password' ng-model='password' />
+    <input type='submit' ng-click='logIn()' value='Kirjaudu' />
+</form>
+{{message}}

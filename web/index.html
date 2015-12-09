@@ -8,8 +8,14 @@
     </head>
     <body ng-app="MyApp">
         <h1>Elokuvakirjasto</h1>
-        
+
         <div ng-view></div>
+        
+        <br />
+        <div ng-controller="UserController">
+            <button ng-click="logOut()" ng-if="userLoggedIn">Kirjaudu ulos</button>
+        </div>
+        
 
 
         <!-- Hyödyllisiä kirjastoja -->

@@ -4,24 +4,44 @@ var MyApp = angular.module('MyApp', ['firebase', 'ngRoute']);
 MyApp.config(function ($routeProvider) {
     $routeProvider
             .when('/', {
-                templateUrl: '/Elokuvakirjasto/web/app/views/etusivu.html',
-                controller: 'ListMoviesController'
+                templateUrl: '/Elokuvakirjasto/web/app/views/login.html',
+                controller: 'UserController'
             })
             .when('/movies', {
                 templateUrl: '/Elokuvakirjasto/web/app/views/movies.html',
-                controller: 'ListMoviesController'
+                controller: 'ListMoviesController',
+                resolve: {
+                        currentAuth: function(AuthenticationService) {
+                            return AuthenticationService.checkLoggedIn();
+                         }
+                     }
             })
             .when('/movies/new', {
                 templateUrl: '/Elokuvakirjasto/web/app/views/newMovie.html',
-                controller: 'AddMovieController'
+                controller: 'AddMovieController',
+                resolve: {
+                        currentAuth: function(AuthenticationService) {
+                            return AuthenticationService.checkLoggedIn();
+                         }
+                     }
             })
             .when('/movies/:id', {
                 templateUrl: '/Elokuvakirjasto/web/app/views/showMovie.html',
-                controller: 'ShowMovieController'
+                controller: 'ShowMovieController',
+                resolve: {
+                        currentAuth: function(AuthenticationService) {
+                            return AuthenticationService.checkLoggedIn();
+                         }
+                     }
             })
             .when('/movies/:id/edit', {
                 templateUrl: '/Elokuvakirjasto/web/app/views/editMovie.html',
-                controller: 'EditMovieController'
+                controller: 'EditMovieController',
+                resolve: {
+                        currentAuth: function(AuthenticationService) {
+                            return AuthenticationService.checkLoggedIn();
+                         }
+                     }
             })
             .otherwise({
                 redirectTo: '/',

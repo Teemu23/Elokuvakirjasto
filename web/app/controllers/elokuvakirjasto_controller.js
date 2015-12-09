@@ -1,7 +1,18 @@
-MyApp.controller('ListMoviesController', function ($scope, $location, FirebaseService, APIService) {
+MyApp.run(function (AuthenticationService, $rootScope) {
+    $rootScope.logOut = function () {
+        AuthenticationService.logUserOut();
+    };
+
+    $rootScope.userLoggedIn = AuthenticationService.getUserLoggedIn();
+});
+
+MyApp.controller('ListMoviesController', function ($scope, currentAuth, $location, FirebaseService, APIService) {
+    if (!currentAuth) {
+        $location.path('/');
+    }
     $scope.movies = FirebaseService.getMovies();
     $scope.moviesCount = 0;
-    
+
     $scope.removeMovie = function (index) {
         FirebaseService.removeMovie($scope.movies[index]);
     };
@@ -12,7 +23,7 @@ MyApp.controller('ListMoviesController', function ($scope, $location, FirebaseSe
         });
         $scope.nimiHaku = '';
         $scope.vuosiHaku = '';
-        
+
     };
 
 
@@ -20,7 +31,10 @@ MyApp.controller('ListMoviesController', function ($scope, $location, FirebaseSe
 
 });
 
-MyApp.controller('AddMovieController', function ($scope, $location, FirebaseService) {
+MyApp.controller('AddMovieController', function ($scope, currentAuth, $location, FirebaseService) {
+    if (!currentAuth) {
+        $location.path('/');
+    }
     $scope.movies = FirebaseService.getMovies();
 
     $scope.addMovie = function () {
@@ -43,7 +57,10 @@ MyApp.controller('AddMovieController', function ($scope, $location, FirebaseServ
 
 });
 
-MyApp.controller('ShowMovieController', function ($scope, $routeParams, FirebaseService) {
+MyApp.controller('ShowMovieController', function ($scope, currentAuth, $routeParams, FirebaseService) {
+    if (!currentAuth) {
+        $location.path('/');
+    }
     FirebaseService.getMovie($routeParams.id, function (data) {
         $scope.data = data;
     });
@@ -52,7 +69,10 @@ MyApp.controller('ShowMovieController', function ($scope, $routeParams, Firebase
 });
 
 
-MyApp.controller('EditMovieController', function ($scope, $location, $routeParams, FirebaseService) {
+MyApp.controller('EditMovieController', function ($scope, currentAuth, $location, $routeParams, FirebaseService) {
+    if (!currentAuth) {
+        $location.path('/');
+    }
     $scope.movies = FirebaseService.getMovies();
     FirebaseService.getMovie($routeParams.id, function (data) {
         $scope.data = data;
@@ -79,4 +99,35 @@ MyApp.controller('MyController', function ($scope, APIService) {
     APIService.findMovie('lord').success(function (movies) {
         $scope.movies = movies;
     });
+});
+
+MyApp.controller('UserController', function ($scope, $location, AuthenticationService) {
+    
+    $scope.logOut = function(){
+        AuthenticationService.logUserOut();
+        $location.path('/');
+    };
+
+    $scope.logIn = function () {
+        AuthenticationService.logUserIn($scope.email, $scope.password)
+                .then(function () {
+                    $location.path('/movies');
+                })
+                .catch(function () {
+                    $scope.message = 'Väärä sähköpostiosoite tai salasana!'
+                });
+    }
+
+    $scope.register = function () {
+        AuthenticationService.createUser($scope.newEmail, $scope.newPassword)
+                .then(function () {
+                    AuthenticationService.logUserIn($scope.newEmail, $scope.newPassword)
+                            .then(function () {
+                                $location.path('/movies');
+                            });
+                })
+                .catch(function () {
+                    $scope.messageReg = 'Tapahtui virhe! Yritä uudestaan';
+                });
+    }
 });

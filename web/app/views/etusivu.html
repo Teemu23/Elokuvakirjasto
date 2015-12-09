@@ -1,8 +1,0 @@
-<ul ng-repeat="movie in movies">
-    <li>
-        <a ng-href="#/movies/{{movie.$id}}"><p>Nimi: {{movie.nimi}} </p></a>
-    </li> 
-    <button ng-click="removeMovie($index)">Poista</button>
-    <a ng-href="#/movies/{{movie.$id}}/edit"><button>Muokkaa</button></a>
-</ul>
-<a ng-href="#/movies/new">Lisää uusi elokuva</a>
