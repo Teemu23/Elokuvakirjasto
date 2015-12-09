@@ -14,6 +14,9 @@ MyApp.config(function ($routeProvider) {
             .when('/movies/new', {
                 templateUrl: '/Elokuvakirjasto/web/app/views/newMovie.html',
                 controller: 'AddMovieController'
+            })
+            .otherwise({
+                redirectTo: '/'
             });
 
 });
