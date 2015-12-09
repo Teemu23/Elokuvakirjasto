@@ -4,7 +4,7 @@ var MyApp = angular.module('MyApp', ['firebase', 'ngRoute']);
 MyApp.config(function ($routeProvider) {
     $routeProvider
             .when('/', {
-                templateUrl: '/Elokuvakirjasto/web/app/views/etusivu.html',
+                templateUrl: '/app/views/etusivu.html',
                 controller: 'ListMoviesController'
             })
             .when('/movies', {
